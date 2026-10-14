@@ -43,7 +43,7 @@ class PackInternacional inherits Pack {
     override method coordinadorACargo() = coordinador
 
     override method precioFinal() {
-        super() + (super() * 0.2)
+        super() + (self.precioBase() + self.sumarCostosDeBeneficios(beneficiosVigentes) * 0.2)
     }
 }
 

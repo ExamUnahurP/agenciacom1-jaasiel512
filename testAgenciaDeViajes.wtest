@@ -1,8 +1,14 @@
+import agenciaDeViajes.*
+
 const Pepe = new Coordinador(estaMotivado = true, rol = "Guia")
 const trasladosPrivados = new BeneficioEspecial(tipo = "Traslados Privados", costo = 10000, estaVigente = false)
 const segurosAdicionales = new BeneficioEspecial(tipo = "Seguros Adicionales", costo = 200, estaVigente = true)
 const packNacional = new PackNacional(provinciaDestino = "Jujuy", duracion = 1000, precioBase = 3000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador)
 
+
 test "Un pack nacional sin beneficios vigentes devuelve el precio base en el precio final"{
-    assert.that(packNacional.precioFinal() == packNacional.precioBase)
+    assert.equals(packNacional.precioFinal(), 3000)
+}
+test "Un pack nacional suma correctamente 2 beneficios vigentes al precio final"{
+    assert.equals(packNacional.precioFinal(), 13200)
 }
