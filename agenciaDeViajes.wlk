@@ -55,13 +55,17 @@ class Coordinador {
 
     method rolQueCumple() = rol
     method cambiarRol(nuevoRol) {
-        rol = nuevoRol
+        if(nuevoRol == "Guia" or nuevoRol == "Acompaniante" or nuevoRol == "Asistente logístico"){
+            rol = nuevoRol
+        } else {
+            self.error("Rol no conocido")
+        }
     }
     method esCalificado() {
         viajesRealizados > 20 and ((rol == "Guia" and motivado) or (rol == "Asistente logístico" and aniosExperiencia == 3) or (rol == "Acompaniante"))
     }
     method estaMotivado() = motivado
-
+    method viajes() = viajesRealizados
 }
 
 class BeneficioEspecial {

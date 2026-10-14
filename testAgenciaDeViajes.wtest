@@ -2,7 +2,7 @@ import agenciaDeViajes.*
 
 describe "Test de agencia de viajes"{
 
-    const pepe = new Coordinador(motivado = true, rol = "Guia", viajesRealizados = 22, aniosExperiencia = 20)   
+    const pepe = new Coordinador(motivado = true, rol = "Guia", viajesRealizados = 22, aniosExperiencia = 2)   
     const trasladosPrivados = new BeneficioEspecial(tipo = "Traslados Privados", costo = 10000, estaVigente = false)
     const segurosAdicionales = new BeneficioEspecial(tipo = "Seguros Adicionales", costo = 200, estaVigente = false)
     const packNacional = new PackNacional(provinciaDestino = "Jujuy", duracion = 200, precioBase = 3000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador = pepe)
@@ -17,5 +17,15 @@ describe "Test de agencia de viajes"{
     test "Un pack internacional sin beneficios vigentes devuelve el precio base mas 20% como final"{
         assert.equals(packInternacional.precioFinal(), 8400)
     }
-    test ""
+    test "Es altamente calificado un guia motivado"{
+        assert.that(pepe.rol == "Guia")
+        assert.that(pepe.motivado)
+        assert.equals(pepe.viajes(), 21)
+    }
+    test "Un asistente logistico con menos de 3 años de experiencia no es calificado"{
+        assert.that(pepe.esCalificado())
+    }
+    test "Un acompañante con cualquier cantidad de viajes es siempre calificado si supera los 20"{
+        assert.that(pepe.esCalificado())
+    } 
 }
