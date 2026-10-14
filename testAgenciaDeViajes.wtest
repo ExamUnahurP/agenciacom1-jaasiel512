@@ -7,6 +7,7 @@ describe "Test de agencia de viajes"{
     const segurosAdicionales = new BeneficioEspecial(tipo = "Seguros Adicionales", costo = 200, estaVigente = false)
     const packNacional = new PackNacional(provinciaDestino = "Jujuy", duracion = 2, precioBase = 3000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador = pepe)
     const packInternacional = new PackInternacional(paisDestino = "Francia", duracion = 5, precioBase = 7000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador = pepe)
+    const packProvincial = new PackProvincial()
 
     test "Un pack nacional sin beneficios vigentes devuelve el precio base en el precio final"{
         assert.equals(packNacional.precioFinal(), 3000)
@@ -34,8 +35,12 @@ describe "Test de agencia de viajes"{
         assert.that(pepe.esCalificado())
     }
     test "Pack nacional es premium"{
-        assert.that(packNacional.duracionDeViaje() > 10)
-        assert.that(packNacional.coordinadorACargo().esCalificado())
+        assert.that(packNacional.esPremium())
     } 
-    test ""
+    test "Pack internacional es premium"{
+        assert.that(packInternacional.esPremium())
+    }
+    test "Pack provincial es premium"{
+        assert.that(packProvincial.esPremium())
+    }
 }

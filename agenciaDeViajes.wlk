@@ -10,7 +10,7 @@ class Pack {
         listaDeBeneficio.sum(b => b.costo)
     }
     method precioFinal() {
-        self.precioBase() + self.sumarCostosDeBeneficios(beneficiosVigentes)
+        self.precioBase() + self.sumarCostosDeBeneficios(self.beneficiosVigentes())
     }
     method esPremium() {}
 }
@@ -28,7 +28,7 @@ class PackNacional inherits Pack {
     override method beneficiosEspecialesDeViaje() = beneficiosEspeciales
     override method coordinadorACargo() = coordinador
     override method esPremium() {
-        duracion > 10 and coordinador.esCalificado()
+        (duracion > 10) and (coordinador.esCalificado())
     }
 }
 
@@ -47,10 +47,21 @@ class PackInternacional inherits Pack {
     override method coordinadorACargo() = coordinador
 
     override method precioFinal() {
-        super() + ((self.precioBase() + self.sumarCostosDeBeneficios(beneficiosVigentes)) * 0.20)
+        super() + ((self.precioBase() + self.sumarCostosDeBeneficios(self.beneficiosVigentes())) * 0.20)
     }
     override method esPremium() {
-        esDeInteres() and duracion > 20 
+        (esDeInteres()) and (duracion > 20) and (escalas() == 0)
+    }
+}
+
+class PackProvincial inherits PackNacional {
+    const property cantidadDeCiudades = 1
+
+    override method esPremium() {
+        (actividadesIncluidas().size() >= 4) and (cantidadDeCiudades > 5) and (self.beneficiosVigentes().size() >= 3)
+    }
+    override method precioFinal() {
+        super() + ((self.precioBase() + self.sumarCostosDeBeneficios(self.beneficiosVigentes())) * 0.05)
     }
 }
 
