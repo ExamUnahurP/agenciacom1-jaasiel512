@@ -3,8 +3,14 @@ class Pack {
     method precioBase() {}
     method beneficiosEspeciales() {}
     method coordinadorACargo() {}
+    method beneficiosVigentes() {
+        self.beneficiosEspeciales().filter(b => b.estaVigente())
+    }
+    method sumarCostosDeBeneficios(listaDeBeneficio) {
+        listaDeBeneficio.sum(b => b.costo)
+    }
     method precioFinal() {
-        self.precioBase() + self.beneficiosEspeciales()
+        self.precioBase() + self.sumarCostosDeBeneficios(beneficiosVigentes)
     }
 }
 
@@ -17,6 +23,10 @@ class PackInternacional inherits Pack {
     const property paisDestino
     const property escalas
     const property esDeInteres
+
+    override method precioFinal() {
+        super() + (super() * 0.2)
+    }
 }
 
 class Coordinador {
