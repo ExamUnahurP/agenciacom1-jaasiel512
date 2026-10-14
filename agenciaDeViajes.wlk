@@ -61,7 +61,7 @@ class PackProvincial inherits PackNacional {
         (actividadesIncluidas().size() >= 4) and (cantidadDeCiudades > 5) and (self.beneficiosVigentes().size() >= 3)
     }
     override method precioFinal() {
-        super() + ((self.precioBase() + self.sumarCostosDeBeneficios(self.beneficiosVigentes())) * 0.05)
+        if(self.esPremium()) super() + ((self.precioBase() + self.sumarCostosDeBeneficios(self.beneficiosVigentes())) * 0.05) else super()
     }
 }
 
