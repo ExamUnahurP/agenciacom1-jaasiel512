@@ -1,6 +1,6 @@
 class Pack {
     method duracionDeVuelo() {}
-    method precioBaseDeVuelo() {}
+    method precioBaseDeViaje() {}
     method beneficiosEspecialesDeViaje() {}
     method coordinadorACargo() {}
     method beneficiosVigentes() {
@@ -12,6 +12,7 @@ class Pack {
     method precioFinal() {
         self.precioBase() + self.sumarCostosDeBeneficios(beneficiosVigentes)
     }
+    method esPremium() {}
 }
 
 class PackNacional inherits Pack {
@@ -22,10 +23,13 @@ class PackNacional inherits Pack {
     const beneficiosEspeciales = []
     const coordinador
     
-    override method duracionDeVuelo() = duracion
+    override method duracionDeViaje() = duracion
     override method precioBaseDeVuelo() = precioBase
     override method beneficiosEspecialesDeViaje() = beneficiosEspeciales
     override method coordinadorACargo() = coordinador
+    override method esPremium() {
+        duracion > 10 and coordinador.esCalificado()
+    }
 }
 
 class PackInternacional inherits Pack {
@@ -37,13 +41,16 @@ class PackInternacional inherits Pack {
     const beneficiosEspeciales
     const coordinador
 
-    override method duracionDeVuelo() = duracion
+    override method duracionDeViaje() = duracion
     override method precioBaseDeVuelo() = precioBase
     override method beneficiosEspecialesDeViaje() = beneficiosEspeciales
     override method coordinadorACargo() = coordinador
 
     override method precioFinal() {
         super() + ((self.precioBase() + self.sumarCostosDeBeneficios(beneficiosVigentes)) * 0.20)
+    }
+    override method esPremium() {
+        esDeInteres() and duracion > 20 
     }
 }
 
@@ -66,6 +73,7 @@ class Coordinador {
     }
     method estaMotivado() = motivado
     method viajes() = viajesRealizados
+    method experiencia() = aniosExperiencia
 }
 
 class BeneficioEspecial {
