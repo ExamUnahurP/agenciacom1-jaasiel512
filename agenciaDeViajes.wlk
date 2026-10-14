@@ -49,7 +49,7 @@ class PackInternacional inherits Pack {
 
 class Coordinador {
     var viajesRealizados = 0
-    var estaMotivado
+    var motivado
     var aniosExperiencia = 0
     var rol
 
@@ -58,8 +58,10 @@ class Coordinador {
         rol = nuevoRol
     }
     method esCalificado() {
-        viajesRealizados > 20 and ()
+        viajesRealizados > 20 and ((rol == "Guia" and motivado) or (rol == "Asistente logístico" and aniosExperiencia == 3) or (rol == "Acompaniante"))
     }
+    method estaMotivado() = motivado
+
 }
 
 class BeneficioEspecial {

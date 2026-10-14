@@ -2,7 +2,7 @@ import agenciaDeViajes.*
 
 describe "Test de agencia de viajes"{
 
-    const pepe = new Coordinador(estaMotivado = true, rol = "Guia")   
+    const pepe = new Coordinador(motivado = true, rol = "Guia", viajesRealizados = 22, aniosExperiencia = 20)   
     const trasladosPrivados = new BeneficioEspecial(tipo = "Traslados Privados", costo = 10000, estaVigente = false)
     const segurosAdicionales = new BeneficioEspecial(tipo = "Seguros Adicionales", costo = 200, estaVigente = false)
     const packNacional = new PackNacional(provinciaDestino = "Jujuy", duracion = 200, precioBase = 3000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador = pepe)
@@ -17,4 +17,5 @@ describe "Test de agencia de viajes"{
     test "Un pack internacional sin beneficios vigentes devuelve el precio base mas 20% como final"{
         assert.equals(packInternacional.precioFinal(), 8400)
     }
+    test ""
 }
