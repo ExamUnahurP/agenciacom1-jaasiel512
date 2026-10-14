@@ -57,6 +57,9 @@ class Coordinador {
     method cambiarRol(nuevoRol) {
         rol = nuevoRol
     }
+    method esCalificado() {
+        viajesRealizados > 20 and ()
+    }
 }
 
 class BeneficioEspecial {
