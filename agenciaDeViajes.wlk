@@ -1,7 +1,7 @@
 class Pack {
-    method duracion() {}
-    method precioBase() {}
-    method beneficiosEspeciales() {}
+    method duracionDeVuelo() {}
+    method precioBaseDeVuelo() {}
+    method beneficiosEspecialesDeViaje() {}
     method coordinadorACargo() {}
     method beneficiosVigentes() {
         self.beneficiosEspeciales().filter(b => b.estaVigente())
@@ -17,12 +17,30 @@ class Pack {
 class PackNacional inherits Pack {
     const property provinciaDestino
     const property actividadesIncluidas = []
+    const duracion
+    const precioBase
+    const beneficiosEspeciales = []
+    const coordinador
+    
+    override method duracionDeVuelo() = duracion
+    override method precioBaseDeVuelo() = precioBase
+    override method beneficiosEspecialesDeViaje() = beneficiosEspeciales
+    override method coordinadorACargo() = coordinador
 }
 
 class PackInternacional inherits Pack {
     const property paisDestino
     const property escalas
     const property esDeInteres
+    const duracion
+    const precioBase
+    const beneficiosEspeciales
+    const coordinador
+
+    override method duracionDeVuelo() = duracion
+    override method precioBaseDeVuelo() = precioBase
+    override method beneficiosEspecialesDeViaje() = beneficiosEspeciales
+    override method coordinadorACargo() = coordinador
 
     override method precioFinal() {
         super() + (super() * 0.2)
@@ -46,5 +64,3 @@ class BeneficioEspecial {
     const property costo
     const property estaVigente
 }
-
-
