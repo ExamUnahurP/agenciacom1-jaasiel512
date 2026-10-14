@@ -1,14 +1,18 @@
 import agenciaDeViajes.*
 
-const Pepe = new Coordinador(estaMotivado = true, rol = "Guia")
-const trasladosPrivados = new BeneficioEspecial(tipo = "Traslados Privados", costo = 10000, estaVigente = false)
-const segurosAdicionales = new BeneficioEspecial(tipo = "Seguros Adicionales", costo = 200, estaVigente = true)
-const packNacional = new PackNacional(provinciaDestino = "Jujuy", duracion = 1000, precioBase = 3000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador)
-
-
-test "Un pack nacional sin beneficios vigentes devuelve el precio base en el precio final"{
-    assert.equals(packNacional.precioFinal(), 3000)
-}
-test "Un pack nacional suma correctamente 2 beneficios vigentes al precio final"{
-    assert.equals(packNacional.precioFinal(), 13200)
+describe "Test de agencia de viajes"{
+    const Pepe = new Coordinador(estaMotivado = true, rol = "Guia")
+    const trasladosPrivados = new BeneficioEspecial(tipo = "Traslados Privados", costo = 10000, estaVigente = false)
+    const segurosAdicionales = new BeneficioEspecial(tipo = "Seguros Adicionales", costo = 200, estaVigente = false)
+    const packNacional = new PackNacional(provinciaDestino = "Jujuy", duracion = 200, precioBase = 3000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador)
+    const packInternacional = new PackInternacional(paisDestino = "Francia", duracion = 1600, precioBase = 7000, beneficiosEspeciales = [trasladosPrivados, segurosAdicionales], coordinador)
+    test "Un pack nacional sin beneficios vigentes devuelve el precio base en el precio final"{
+        assert.equals(packNacional.precioFinal(), 3000)
+    }
+    test "Un pack nacional suma correctamente 2 beneficios vigentes al precio final"{
+        assert.equals(packNacional.precioFinal(), 13200)
+    }
+    test "Un pack internacional sin beneficios vigentes devuelve el precio base mas 20% como final"{
+        assert.equals(packInternacional.precioFinal(), 8400)
+    }
 }
